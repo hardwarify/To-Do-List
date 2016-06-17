@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TO-DO-LIST</title>
+</head>
+    <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Welcome user</h1>
+    <form action = "{{ url_for('_user') }}" method = "post">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type = "text" name = "new_task" placeholder = "Add new task" />
+
+    	<label for="dt"> </label>
+	    &emsp;&emsp;&emsp; <input name="dt" type="date"/>
+	    <input type="submit" value="New Task"/><br><br>
+    </form>
+    <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; COMPLETED TASK</h3>
+
+    <table>
+         <thead>
+            <tr>
+               <th>&emsp;&emsp;&emsp;&emsp;Task &emsp;&emsp;&emsp;</th>
+               <th>date</th>
+
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for _Complete_task in _Completed_task %}
+               <tr>
+                  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ _Complete_task.Task_event }}&emsp;&emsp;</td>
+                  <td>{{ _Complete_task.date }}</td>
+
+               </tr>
+            {% endfor %}
+
+         </tbody>
+      </table><br><br><br>
+
+
+    <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; TODAY'S TASK</h3>
+    <form action="{{url_for('_task_comp')}}" method="post">
+
+    <table>
+         <thead>
+            <tr>
+               <th>&emsp;&emsp;&emsp;&emsp;Task &emsp;&emsp;&emsp;</th>
+               <th>date</th>
+
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for today_task in todays_task %}
+               <tr>
+                  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ today_task.Task_event }}&emsp;&emsp;</td>
+                  <td>{{ today_task.date }}</td>
+                   <!--<td>{{today_task.id}}</td> -->
+                   <td><input type="checkbox" name="task_completion" value={{today_task.id}} </td>
+                            <input type="submit" value="Completed"/><br>
+
+               </tr>
+            {% endfor %}
+
+         </tbody>
+      </table><br><br><br>
+    </form>
+    <h3> &emsp;&emsp;&emsp;&emsp;UPCOMING DAYS TASK</h3>
+    <table>
+         <thead>
+            <tr>
+               <th>&emsp;&emsp;&emsp;&emsp;Task</th>
+               <th>date</th>
+
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for upcoming in upcomings %}
+               <tr>
+                  <td>&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ upcoming.Task_event }}&emsp;&emsp;&emsp;&emsp;</td>
+                  <td>{{ upcoming.date }}</td>
+
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+
+</body>
+</html>
